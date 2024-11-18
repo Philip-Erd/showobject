@@ -5,5 +5,5 @@ class Showobject:
         An Object that can be updated.
     '''
 
-    def update(timer: Timer):
+    def update(self, timer: Timer):
         pass
