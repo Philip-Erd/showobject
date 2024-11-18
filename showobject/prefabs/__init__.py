@@ -1,0 +1,1 @@
+from .effects.blink import Blink

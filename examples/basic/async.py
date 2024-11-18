@@ -1,5 +1,6 @@
 import showobject
 from showobject import Timer, Showobject
+from showobject.prefabs import Blink
 
 import asyncio
 import time
@@ -10,11 +11,15 @@ class RootObject(Showobject):
     def __init__(self) -> None:
         super().__init__()
         # add other Showobjects or more variables
+        self.blink = Blink(1000, 500)
 
         self.value: float = 0.0
 
     def update(self, timer: Timer):
         #update other Showobjects
+        self.blink.update(timer)
+
+        print(self.blink.value)
 
         self.value += timer.dt
         if self.value > 1.0:
