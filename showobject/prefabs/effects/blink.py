@@ -1,27 +1,20 @@
 from showobject import Showobject, Timer
 
 class Blink(Showobject):
+    '''
+        Turn value on and off depending on the given on and off time.
 
-    def __init__(self, on_time: int, off_time: int, start_value=False) -> None:
-        super().__init__()
+        Attributes:
+        value: bool
+            is True when blink is on and False otherwise
+    '''
+
+    def __init__(self, on_time: int, off_time: int) -> None:
         self._on_time = on_time
-        self._off_time = off_time
-        self._time_passed: int = 0
+        self._total_time = on_time + off_time
 
-        self.value = start_value
+        self.value = False
 
     def update(self, timer: Timer):
-        super().update(timer)
-        self._time_passed += timer.dt_ms
-
-        #output is on -> turn off
-        if self.value and self._time_passed > self._on_time:
-            self.value = False
-            self._time_passed = 0
-        
-        #output is off -> turn on
-        if not self.value and self._time_passed > self._off_time:
-            self.value = True
-            self._time_passed = 0            
-
+         self.value = False if timer.ticks_ms % self._total_time > self._on_time else True
         
